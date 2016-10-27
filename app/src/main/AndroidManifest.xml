@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.nikhiljoshi.enlighten">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.Activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.Activity.SelectFriendsActivity"
+            android:label="@string/title_activity_select_friends" />
+
+        <activity android:name=".ui.Activity.MainActivity"
+            android:label="My Friends!">
+        </activity>
+
+        <activity android:name=".ui.Activity.ArticleActivity"
+            android:label="Tweets"/>
+
+        <activity android:name=".ui.Activity.PackActivity"
+            android:label = "Pack" />
+
+        <provider
+            android:authorities="com.example.nikhiljoshi.enlighten"
+            android:name=".data.Provider.EnlightenProvider" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bb0dd27475a916cb1b76e84bbb926690586f49b9"
+            />
+    </application>
+
+</manifest>

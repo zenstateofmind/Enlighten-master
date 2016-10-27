@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/list_item_padding"
+    app:columnCount="2">
+
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/book_height"
+        android:id="@+id/book_image"
+        android:src="@drawable/book"
+        app:layout_rowSpan="2"
+        android:adjustViewBounds="true"
+        app:layout_columnWeight="1"
+        app:layout_row="0"
+        app:layout_column="0" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text "
+        android:id="@+id/book_title"
+        app:layout_columnWeight="3"
+        android:layout_marginLeft="@dimen/list_item_caption_padding"
+        app:layout_row="0"
+        app:layout_column="1" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/book_author"
+        app:layout_columnWeight="3"
+        android:layout_marginLeft="@dimen/list_item_caption_padding"
+        app:layout_row="1"
+        app:layout_column="1" />
+
+
+</android.support.v7.widget.GridLayout>

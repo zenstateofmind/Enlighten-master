@@ -1,0 +1,13 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="list_item_padding">@dimen/abc_list_item_padding_horizontal_material</dimen>
+
+    <dimen name="book_height">120dp</dimen>
+    <dimen name="book_width">80dp</dimen>
+
+    <dimen name="list_item_caption_padding">@dimen/abc_list_item_padding_horizontal_material</dimen>
+
+</resources>
