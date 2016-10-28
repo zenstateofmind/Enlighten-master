@@ -62,20 +62,6 @@ public class LoginFragment extends Fragment {
             login();
         }
 
-        final Button testButton = (Button) rootView.findViewById(R.id.test_button);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sessionManager.getActiveSession() == null) {
-                    Toast.makeText(getContext(), "null", Toast.LENGTH_LONG).show();
-                } else {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
-
-                }
-
-            }
-        });
     }
 
     private void login() {
