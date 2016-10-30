@@ -5,7 +5,7 @@
     <string name="no_books_available">Could not grab information on the available books :(</string>
     <string name="no_books_available_internet_access">Could not get data due to internet
     access issues! </string>
-    <string name="select_friends_instruction">Hi! Please select all your friend who post interesting articles!</string>
+    <string name="select_friends_instruction">Hi! Please select all your friends who post interesting articles!</string>
     <string name="ok">OK</string>
     <string name="title_activity_select_friends">Select Friends</string>
     <string name="headlines_hint">This is the main headlines</string>
@@ -24,4 +24,7 @@
     <string name="loading_tweets">Waiting on Twitter!</string>
     <string name="delete_this_pack">Delete this pack</string>
     <string name="are_you_sure_about_deleting_packs">Are you sure? This will also delete all the friends in this pack!</string>
+    <string name="move_friends_to_pack">Move friends to Pack</string>
+    <string name="logout">Logout</string>
+    <string name="verify_user_wants_to_logout">Are you sure you want to logout of this awesomeness?</string>
 </resources>

@@ -20,7 +20,7 @@ public class TestEnlightenContract extends AndroidTestCase {
 
     public void testBuildFriendUri() {
 
-        Uri uriWithCurrentUserId = FriendEntry.buildFriendUriWithCurrentUserId(CURRENT_USER_ID);
+        Uri uriWithCurrentUserId = FriendEntry.buildFriendUriWithCurrentUserSessionId(CURRENT_USER_ID);
         assertNotNull("Error: URI shouldn't be null", uriWithCurrentUserId);
 
         assertEquals("The user session id has changed from the one inserted into the user id",

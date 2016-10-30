@@ -63,7 +63,7 @@ public class TestEnlightenProvider extends AndroidTestCase {
         long friendUserId = 145L;
         long packId = 1234L;
 
-        String type = mContext.getContentResolver().getType(FriendEntry.buildFriendUriWithCurrentUserId(currentSessionUserId));
+        String type = mContext.getContentResolver().getType(FriendEntry.buildFriendUriWithCurrentUserSessionId(currentSessionUserId));
         assertEquals("This should return multiple type", FriendEntry.CONTENT_TYPE, type);
 
         type = mContext.getContentResolver().getType(FriendEntry
@@ -91,7 +91,7 @@ public class TestEnlightenProvider extends AndroidTestCase {
 
         // query friends table with current user id
         long currentSessionUserId = Long.parseLong(contentValues.getAsString(FriendEntry.COLUMN_CURRENT_SESSION_USER_ID));
-        Uri uri = FriendEntry.buildFriendUriWithCurrentUserId(currentSessionUserId);
+        Uri uri = FriendEntry.buildFriendUriWithCurrentUserSessionId(currentSessionUserId);
         Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
 
         assertTrue("Could not get information back", cursor.moveToFirst());
@@ -152,7 +152,7 @@ public class TestEnlightenProvider extends AndroidTestCase {
         contentValues.put(FriendEntry.COLUMN_PROFILE_NAME, upatedProfileName);
 
         Uri uriWithCurrentUserId =
-                FriendEntry.buildFriendUriWithCurrentUserId(contentValues.getAsLong(FriendEntry.COLUMN_CURRENT_SESSION_USER_ID));
+                FriendEntry.buildFriendUriWithCurrentUserSessionId(contentValues.getAsLong(FriendEntry.COLUMN_CURRENT_SESSION_USER_ID));
 
         int numRowsUpdated = mContext.getContentResolver().update(uriWithCurrentUserId, contentValues, null, null);
 
@@ -179,7 +179,7 @@ public class TestEnlightenProvider extends AndroidTestCase {
 
         // delete from friend table with user id
         Long userSessionId = friendData.getAsLong(FriendEntry.COLUMN_CURRENT_SESSION_USER_ID);
-        Uri uri = FriendEntry.buildFriendUriWithCurrentUserId(userSessionId);
+        Uri uri = FriendEntry.buildFriendUriWithCurrentUserSessionId(userSessionId);
         int numRowsDeleted = mContext.getContentResolver().delete(uri, null, null);
         assertTrue("Rows haven't been deleted... deleted rows: " + numRowsDeleted, numRowsDeleted == 1);
 

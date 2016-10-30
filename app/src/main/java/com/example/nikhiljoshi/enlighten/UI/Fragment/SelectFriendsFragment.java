@@ -131,7 +131,7 @@ public class SelectFriendsFragment extends Fragment {
 
         ////// Remove the next set of code... just to ensure that info was added to db /////
         long currentSessionUserId = Twitter.getSessionManager().getActiveSession().getUserId();
-        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserId(currentSessionUserId);
+        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserSessionId(currentSessionUserId);
         Cursor cursor = getContext().getContentResolver().query(uriWithCurrentUserId, null, null, null, null);
 
         int numFriendsAdded = 0;

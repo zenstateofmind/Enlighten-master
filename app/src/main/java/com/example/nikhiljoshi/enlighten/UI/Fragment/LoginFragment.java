@@ -1,6 +1,8 @@
 package com.example.nikhiljoshi.enlighten.ui.Fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.nikhiljoshi.enlighten.MyApplication;
 import com.example.nikhiljoshi.enlighten.R;
+import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.SelectFriendsActivity;
 import com.twitter.sdk.android.Twitter;
@@ -22,6 +25,9 @@ import com.twitter.sdk.android.core.SessionManager;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,6 +40,12 @@ public class LoginFragment extends Fragment {
     SessionManager<TwitterSession> sessionManager;
     private TwitterLoginButton loginButton;
     private View rootView;
+
+    private static final String[] FRIENDS_COLUMNS = {
+            EnlightenContract.FriendEntry.COLUMN_PROFILE_NAME
+    };
+
+    private static final int COL_PROFILE_NAME = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +80,15 @@ public class LoginFragment extends Fragment {
         Callback<TwitterSession> callback = new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                Intent intent = new Intent(getContext(), SelectFriendsActivity.class);
-                startActivity(intent);
+
+                if (containsFriends()) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getContext(), SelectFriendsActivity.class);
+                    startActivity(intent);
+                }
+
             }
 
             @Override
@@ -78,6 +97,25 @@ public class LoginFragment extends Fragment {
             }
         };
         loginButton.setCallback(callback);
+    }
+
+    private boolean containsFriends() {
+
+        List<String> chosenFriendsProfileNames = new ArrayList<>();
+
+        final Uri uriWithCurrentUserSessionId =
+                EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserSessionId(Twitter.getSessionManager().getActiveSession().getUserId());
+        final Cursor cursor = getContext().getContentResolver().query(uriWithCurrentUserSessionId, FRIENDS_COLUMNS, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+
+
+        }
+
+        cursor.close();
+        return false;
     }
 
     @Override

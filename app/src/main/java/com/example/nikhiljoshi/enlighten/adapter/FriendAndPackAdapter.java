@@ -180,11 +180,9 @@ public class FriendAndPackAdapter extends RecyclerView.Adapter {
         if (!cursor.moveToFirst()) {
             Log.e(LOG_TAG, "The user hasn't chosen any friends! Weird... he should have chosen some.");
         } else {
-
             do {
                 friends.add(EnlightenContract.FriendEntry.convertToFriend(cursor));
             } while (cursor.moveToNext());
-
         }
 
         cursor.close();

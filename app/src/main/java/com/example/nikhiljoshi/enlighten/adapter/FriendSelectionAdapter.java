@@ -161,7 +161,7 @@ public class FriendSelectionAdapter extends RecyclerView.Adapter<FriendSelection
         final ContentResolver contentResolver = context.getContentResolver();
 
         long currentSessionUserId = Twitter.getSessionManager().getActiveSession().getUserId();
-        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserId(currentSessionUserId);
+        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserSessionId(currentSessionUserId);
 
         // Get all the friends from DB who are in other packs
         String selectionQuery = FriendEntry.COLUMN_PACK_KEY + " != ? AND " + FriendEntry.COLUMN_PACK_KEY + " IS NOT NULL";
@@ -246,9 +246,9 @@ public class FriendSelectionAdapter extends RecyclerView.Adapter<FriendSelection
 
         List<String> chosenFriendsProfileNames = new ArrayList<>();
 
-        final Uri uriWithCurrentUserId =
-                EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserId(Twitter.getSessionManager().getActiveSession().getUserId());
-        final Cursor cursor = context.getContentResolver().query(uriWithCurrentUserId, FRIENDS_COLUMNS, null, null, null);
+        final Uri uriWithCurrentUserSessionId =
+                EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserSessionId(Twitter.getSessionManager().getActiveSession().getUserId());
+        final Cursor cursor = context.getContentResolver().query(uriWithCurrentUserSessionId, FRIENDS_COLUMNS, null, null, null);
 
         if (cursor.moveToFirst()) {
 

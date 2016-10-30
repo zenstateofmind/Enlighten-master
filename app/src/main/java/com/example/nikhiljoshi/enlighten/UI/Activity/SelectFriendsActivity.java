@@ -1,9 +1,11 @@
 package com.example.nikhiljoshi.enlighten.ui.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -11,7 +13,6 @@ import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.ui.Fragment.ChosenFriendsFragment;
 import com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsFragment;
-import com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsInstructionsFragment;
 import com.twitter.sdk.android.Twitter;
 
 import static com.example.nikhiljoshi.enlighten.ui.Fragment.ChosenFriendsFragment.PACK_ID_TAG;
@@ -24,7 +25,7 @@ import static com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity.*;
  * with a fragment that allows users to choose their friend's whose
  * tweet articles they are interested in
  */
-public class SelectFriendsActivity extends AppCompatActivity implements SelectFriendsInstructionsFragment.Callback {
+public class SelectFriendsActivity extends AppCompatActivity  {
 
     private long packId;
     private long parentPackId;
@@ -57,20 +58,25 @@ public class SelectFriendsActivity extends AppCompatActivity implements SelectFr
              * If this activity is loading for the first time, display the fragment that instructs the
              * user on what to do with this activity
              */
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.select_friends_container,
-                            new SelectFriendsInstructionsFragment())
-                    .commit();
 
+            // Load the dialog box that asks user to select the person
+            // once the user selects ok, hit the launchSelectFriendsFragment
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.select_friends_instruction)
+                    .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            launchSelectFriendsFragment(ActivityToStartOnFriendSelection.MAIN_ACTIVITY,
+                                    FriendSource.API, NO_PACK);
+                        }
+                    });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
 
     }
 
-    @Override
-    public void onSelected() {
-        launchSelectFriendsFragment(ActivityToStartOnFriendSelection.MAIN_ACTIVITY,
-                                    FriendSource.API, NO_PACK);
-    }
 
     private void launchSelectFriendsFragment(ActivityToStartOnFriendSelection activityToStartOnFriendSelectionEnum,
                                              FriendSource friendsSourceEnum, Long packId) {

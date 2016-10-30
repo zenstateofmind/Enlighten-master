@@ -27,9 +27,11 @@ import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.adapter.FriendAndPackAdapter;
 import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.pojo.Friend;
+import com.example.nikhiljoshi.enlighten.ui.Activity.LoginActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.SelectFriendsActivity;
 import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +82,7 @@ public class ChosenFriendsFragment extends Fragment {
         inflater.inflate(R.menu.add_pack_friends_menu, menu);
         if (packId != -1) {
             final MenuItem addFriendsOption = menu.findItem(R.id.add_friends);
-            addFriendsOption.setTitle("Move friends to Pack");
+            addFriendsOption.setTitle(R.string.move_friends_to_pack);
 
             final MenuItem addPackItem = menu.findItem(R.id.add_pack);
             addPackItem.setVisible(false);
@@ -114,6 +116,19 @@ public class ChosenFriendsFragment extends Fragment {
                 //              delete the friends with this pack id
                 //                  go back to MainActivity
                 deletePack();
+            }case R.id.logout: {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(getString(R.string.verify_user_wants_to_logout))
+                        .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Twitter.getSessionManager().clearActiveSession();
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                builder.show();
+
             } default:
                 return super.onOptionsItemSelected(item);
         }

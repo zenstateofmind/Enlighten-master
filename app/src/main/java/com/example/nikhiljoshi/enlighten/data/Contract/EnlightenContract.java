@@ -63,7 +63,7 @@ public class EnlightenContract {
             return ContentUris.withAppendedId(CONTENT_URI, insertedRowId);
         }
 
-        public static Uri buildFriendUriWithCurrentUserId(Long currentSessionUserId) {
+        public static Uri buildFriendUriWithCurrentUserSessionId(Long currentSessionUserId) {
             return CONTENT_URI.buildUpon().appendPath(currentSessionUserId + "").build();
         }
 

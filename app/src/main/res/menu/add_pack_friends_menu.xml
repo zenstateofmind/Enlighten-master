@@ -15,4 +15,7 @@
         android:enabled="false"
         android:visible="false"/>
 
+    <item android:id="@+id/logout"
+        android:title="@string/logout"/>
+
 </menu>
