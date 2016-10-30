@@ -1,22 +1,13 @@
 package com.example.nikhiljoshi.enlighten;
 
-import android.content.ContentValues;
-import android.os.Parcelable;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.UrlEntity;
-import com.twitter.sdk.android.core.models.User;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**

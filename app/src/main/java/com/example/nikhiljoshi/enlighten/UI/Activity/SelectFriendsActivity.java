@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.nikhiljoshi.enlighten.R;
-import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
+import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.ui.Fragment.ChosenFriendsFragment;
 import com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsFragment;
 import com.twitter.sdk.android.Twitter;

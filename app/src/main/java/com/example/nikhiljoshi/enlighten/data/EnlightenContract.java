@@ -1,4 +1,4 @@
-package com.example.nikhiljoshi.enlighten.data.Contract;
+package com.example.nikhiljoshi.enlighten.data;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

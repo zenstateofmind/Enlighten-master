@@ -6,7 +6,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,16 +24,11 @@ import android.widget.Toast;
 
 import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.adapter.FriendAndPackAdapter;
-import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
-import com.example.nikhiljoshi.enlighten.pojo.Friend;
+import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.ui.Activity.LoginActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.SelectFriendsActivity;
 import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterSession;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsFragment.*;
 

@@ -36,12 +36,21 @@
 
         <provider
             android:authorities="com.example.nikhiljoshi.enlighten"
-            android:name=".data.Provider.EnlightenProvider" />
+            android:name=".data.EnlightenProvider" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="bb0dd27475a916cb1b76e84bbb926690586f49b9"
             />
+
+        <receiver android:name=".widget.WidgetTwitterFriendsProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/widget_twitter_friends_info" />
+        </receiver>
+
     </application>
 
 </manifest>

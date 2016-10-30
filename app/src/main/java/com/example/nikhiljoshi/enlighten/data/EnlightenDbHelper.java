@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract.*;
+import static com.example.nikhiljoshi.enlighten.data.EnlightenContract.*;
 
 /**
  * Created by nikhiljoshi on 6/3/16.

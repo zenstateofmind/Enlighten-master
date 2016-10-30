@@ -1,4 +1,4 @@
-package com.example.nikhiljoshi.enlighten.data.Provider;
+package com.example.nikhiljoshi.enlighten.data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -8,12 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.example.nikhiljoshi.enlighten.data.EnlightenDbHelper;
-import com.example.nikhiljoshi.enlighten.pojo.Friend;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract.*;
+import static com.example.nikhiljoshi.enlighten.data.EnlightenContract.*;
 
 /**
  * Created by nikhiljoshi on 6/2/16.

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.Utility;
-import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
+import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.pojo.Friend;
 import com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsFragment;
 import com.squareup.picasso.Picasso;
@@ -24,7 +24,7 @@ import com.twitter.sdk.android.core.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract.*;
+import static com.example.nikhiljoshi.enlighten.data.EnlightenContract.*;
 
 /**
  * Adapter that holds information for friends that need to be selected -- either through DB

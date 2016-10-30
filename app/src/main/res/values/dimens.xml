@@ -9,5 +9,7 @@
     <dimen name="book_width">80dp</dimen>
 
     <dimen name="list_item_caption_padding">@dimen/abc_list_item_padding_horizontal_material</dimen>
+    <dimen name="widget_default_height">120dp</dimen>
+    <dimen name="widget_default_width">100dp</dimen>
 
 </resources>

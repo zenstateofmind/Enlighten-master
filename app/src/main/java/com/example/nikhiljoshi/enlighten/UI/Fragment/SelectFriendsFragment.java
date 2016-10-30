@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.adapter.FriendSelectionAdapter;
-import com.example.nikhiljoshi.enlighten.data.Contract.EnlightenContract;
+import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.network.MyTwitterApi;
 import com.example.nikhiljoshi.enlighten.pojo.Friend;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
