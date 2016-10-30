@@ -2,26 +2,39 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent" >
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
         android:id="@+id/widget"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/cardview_dark_background">
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/widget_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/widget_list_item"/>
 
         <TextView
-            android:id="@+id/no_new_friends"
+            android:id="@+id/not_logged_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:fontFamily="sans-serif"
-            android:text="@string/please_add_friends_or_log_in"
+            android:text="@string/please_log_in"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:textAppearance="?android:textAppearanceLarge"/>
+
+        <TextView
+            android:id="@+id/no_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:fontFamily="sans-serif"
+            android:text="@string/please_add_some_friends"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/activity_vertical_margin"

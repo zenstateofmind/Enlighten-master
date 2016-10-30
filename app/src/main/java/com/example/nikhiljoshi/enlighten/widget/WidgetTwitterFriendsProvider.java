@@ -3,6 +3,7 @@ package com.example.nikhiljoshi.enlighten.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -27,9 +28,10 @@ public class WidgetTwitterFriendsProvider extends AppWidgetProvider {
 
 
             if (activeSession != null) {
-
+                views.setRemoteAdapter(R.id.widget_list_view, new Intent(context, WidgetTwitterFriendsRemoteViewService.class));
             } else {
-                views.setViewVisibility(R.id.no_new_friends, View.VISIBLE);
+                views.setViewVisibility(R.id.not_logged_in, View.VISIBLE);
+                views.setViewVisibility(R.id.not_logged_in, View.INVISIBLE);
                 views.setViewVisibility(R.id.widget_list_view, View.INVISIBLE);
             }
 

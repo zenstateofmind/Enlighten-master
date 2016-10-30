@@ -27,5 +27,6 @@
     <string name="move_friends_to_pack">Move friends to Pack</string>
     <string name="logout">Logout</string>
     <string name="verify_user_wants_to_logout">Are you sure you want to logout of this awesomeness?</string>
-    <string name="please_add_friends_or_log_in">Either you haven't logged in or you haven't selected any friends</string>
+    <string name="please_log_in">Please log in!</string>
+    <string name="please_add_some_friends">Please add some friends!</string>
 </resources>

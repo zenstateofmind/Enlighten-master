@@ -51,6 +51,12 @@
                        android:resource="@xml/widget_twitter_friends_info" />
         </receiver>
 
+        <service
+            android:name=".widget.WidgetTwitterFriendsRemoteViewService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>
