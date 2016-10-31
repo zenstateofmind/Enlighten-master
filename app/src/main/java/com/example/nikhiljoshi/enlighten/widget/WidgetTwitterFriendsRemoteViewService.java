@@ -12,6 +12,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.example.nikhiljoshi.enlighten.R;
+import com.example.nikhiljoshi.enlighten.adapter.FriendAndPackAdapter;
 import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.twitter.sdk.android.Twitter;
 
@@ -22,10 +23,14 @@ import com.twitter.sdk.android.Twitter;
 public class WidgetTwitterFriendsRemoteViewService extends RemoteViewsService {
 
     private static final String[] FRIENDS_COLUMNS = {
-            EnlightenContract.FriendEntry.COLUMN_PROFILE_NAME
+            EnlightenContract.FriendEntry.COLUMN_PROFILE_NAME,
+            EnlightenContract.FriendEntry.COLUMN_USER_NAME,
+            EnlightenContract.FriendEntry.COLUMN_USER_ID
     };
 
     private static final int COL_PROFILE_NAME = 0;
+    private static final int COL_USER_NAME = 1;
+    private static final int COL_USER_ID = 2;
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -78,7 +83,11 @@ public class WidgetTwitterFriendsRemoteViewService extends RemoteViewsService {
                 RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_list_item);
                 views.setTextViewText(R.id.widget_list_item_friend, data.getString(COL_PROFILE_NAME));
                 Log.i(WidgetTwitterFriendsRemoteViewService.class.getSimpleName(), data.getString(COL_PROFILE_NAME));
-                //probably need to do some gibberish with intent
+
+                Intent fillIntent = new Intent();
+                fillIntent.putExtra(FriendAndPackAdapter.USER_NAME, data.getString(COL_USER_NAME));
+                fillIntent.putExtra(FriendAndPackAdapter.USER_ID, data.getLong(COL_USER_ID));
+                views.setOnClickFillInIntent(R.id.widget_list_item, fillIntent);
 
                 return views;
 

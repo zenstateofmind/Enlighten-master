@@ -46,6 +46,7 @@
         <receiver android:name=".widget.WidgetTwitterFriendsProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.nikhiljoshi.enlighten.ACTION_DATA_UPDATED"/>
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                        android:resource="@xml/widget_twitter_friends_info" />

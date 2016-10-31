@@ -2,6 +2,7 @@ package com.example.nikhiljoshi.enlighten.ui.Fragment;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -36,6 +37,9 @@ public class SelectFriendsFragment extends Fragment {
 
     public static final String ACTIVITY_TO_START_ON_FRIENDS_SELECTION_TAG = "activity_to_start_on_selection";
     public static final String FRIEND_SOURCE_FOR_ADDING_NEW_FRIENDS_TAG = "chose_from_db_or_api";
+
+    public static final String ACTION_DATA_UPDATED =
+            "com.example.nikhiljoshi.enlighten.ACTION_DATA_UPDATED";
 
     private static final String LOG_TAG = SelectFriendsFragment.class.getSimpleName();
 
@@ -108,6 +112,7 @@ public class SelectFriendsFragment extends Fragment {
                         intent.putExtra(ChosenFriendsFragment.PACK_ID_TAG, packId);
                         intent.putExtra(PackActivity.PARENT_PACK_ID_TAG, parentPackId);
                     }
+                    updateWidgets();
                     getActivity().finish();
                     startActivity(intent);
                 }
@@ -147,6 +152,13 @@ public class SelectFriendsFragment extends Fragment {
         cursor.close();
 
         Log.i(LOG_TAG, "Added " + numFriendsAdded + " friends to the db! Good job!");
+    }
+
+    private void updateWidgets() {
+        Context context = getContext();
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
     }
 
     private void updateFriendInDb(Friend user) {
