@@ -44,6 +44,7 @@ public class FriendAndPackAdapter extends RecyclerView.Adapter  {
 
     public FriendAndPackAdapter(Context context) {
         mContext = context;
+        friends = new ArrayList<>();
     }
 
     @Override
@@ -167,13 +168,7 @@ public class FriendAndPackAdapter extends RecyclerView.Adapter  {
         return super.getItemViewType(position);
     }
 
-    public void loadFriendsFromDb(Long packId) {
-
-        List<Friend> friends = new ArrayList<>();
-        long currentSessionUserId = Twitter.getSessionManager().getActiveSession().getUserId();
-        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildUriWithCurrentUserIdAndPackId(currentSessionUserId, packId);
-
-        Cursor cursor = mContext.getContentResolver().query(uriWithCurrentUserId, null, null, null, null);
+    public void loadFriendsFromDb(Cursor cursor) {
 
         if (!cursor.moveToFirst()) {
             Log.e(LOG_TAG, "The user hasn't chosen any friends! Weird... he should have chosen some.");
@@ -183,9 +178,7 @@ public class FriendAndPackAdapter extends RecyclerView.Adapter  {
             } while (cursor.moveToNext());
         }
 
-        cursor.close();
-
-        addFriends(friends);
+        notifyDataSetChanged();
 
     }
 

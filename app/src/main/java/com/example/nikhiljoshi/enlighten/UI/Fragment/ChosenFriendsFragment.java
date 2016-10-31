@@ -6,9 +6,14 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,20 +30,26 @@ import android.widget.Toast;
 import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.adapter.FriendAndPackAdapter;
 import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
+import com.example.nikhiljoshi.enlighten.pojo.Friend;
 import com.example.nikhiljoshi.enlighten.ui.Activity.LoginActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.SelectFriendsActivity;
 import com.twitter.sdk.android.Twitter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.nikhiljoshi.enlighten.ui.Fragment.SelectFriendsFragment.*;
 
 /**
  * Created by nikhiljoshi on 6/7/16.
  */
-public class ChosenFriendsFragment extends Fragment {
+public class ChosenFriendsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = ChosenFriendsFragment.class.getSimpleName();
     public static final String PACK_ID_TAG = "pack_id_tag";
+    private static final int LOAD_FRIENDS_LOADER = 0;
+
     private RecyclerView mRecyclerView;
     private FriendAndPackAdapter mFriendAndPackAdapter;
     private Long packId;
@@ -60,15 +71,21 @@ public class ChosenFriendsFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_chosen_friends, container, false);
         mFriendAndPackAdapter = new FriendAndPackAdapter(getActivity());
-        mFriendAndPackAdapter.loadFriendsFromDb(packId);
+        // Friends are being loaded through the cursor loader
         mFriendAndPackAdapter.loadPacksFromDb(packId);
-        //TODO: Add a method to load packs
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.chosen_friends_recyclerView);
         mRecyclerView.setAdapter(mFriendAndPackAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         return rootView;
+    }
+
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(LOAD_FRIENDS_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -209,4 +226,25 @@ public class ChosenFriendsFragment extends Fragment {
         return builder.create();
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        List<Friend> friends = new ArrayList<>();
+        long currentSessionUserId = Twitter.getSessionManager().getActiveSession().getUserId();
+        Uri uriWithCurrentUserId = EnlightenContract.FriendEntry.buildUriWithCurrentUserIdAndPackId(currentSessionUserId, packId);
+
+        return new CursorLoader(getActivity(),
+                uriWithCurrentUserId,
+                null,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mFriendAndPackAdapter.loadFriendsFromDb(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) { }
 }
