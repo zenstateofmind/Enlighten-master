@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +29,6 @@ import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.PackActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.twitter.sdk.android.Twitter;
@@ -104,10 +102,8 @@ public class SelectFriendsFragment extends Fragment {
             mFriendSelectionAdapter.loadAllFriendsFromDb(packId);
         } else if (friendSourceEnum == FriendSource.API) {
             MyTwitterApi api = new MyTwitterApi(getActivity().getApplicationContext());
-            api.getFriendsListTake2(mFriendSelectionAdapter);
+            api.getFriendsListSynchronous(mFriendSelectionAdapter);
         }
-
-//        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
 
         AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to

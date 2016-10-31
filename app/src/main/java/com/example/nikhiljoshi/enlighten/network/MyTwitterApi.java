@@ -1,15 +1,14 @@
 package com.example.nikhiljoshi.enlighten.network;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.nikhiljoshi.enlighten.Utility;
 import com.example.nikhiljoshi.enlighten.adapter.ArticleAdapter;
 import com.example.nikhiljoshi.enlighten.adapter.FriendSelectionAdapter;
 import com.example.nikhiljoshi.enlighten.pojo.FriendIds;
-import com.example.nikhiljoshi.enlighten.pojo.FriendsInfo;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -19,7 +18,6 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,35 +38,7 @@ public class MyTwitterApi {
         twitterApiClient = Twitter.getApiClient();
     }
 
-    public void getFriends(FriendSelectionAdapter friendSelectionAdapter) {
-        final List<User> friends = new ArrayList<>();
-        getFriendsList(friendSelectionAdapter, -1L, 2);
-    }
-
-    private void getFriendsList(final FriendSelectionAdapter friendSelectionAdapter, long next_cursor, final int countDown) {
-        myTwitterApiClient.getFriendsService().list(twitterSession.getUserId(), next_cursor, new Callback<FriendsInfo>() {
-            @Override
-            public void success(Result<FriendsInfo> result) {
-                List<User> friends = result.data.users;
-                for (User friend : friends) {
-//                    getUserTweetsWithLinks(friend.id, friend.name);
-                }
-                friendSelectionAdapter.addUsersFromApi(friends);
-                if (countDown > 0) {
-                    getFriendsList(friendSelectionAdapter, result.data.nextCursor, countDown - 1);
-                    Log.i(LOG, "Next cursor: " + result.data.nextCursor);
-                }
-                Toast.makeText(context, "Number of friends: " + friends.size(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-                Log.d(LOG, "Failed in getting friend's list " + e);
-            }
-        });
-    }
-
-    public void getFriendsListTake2(final FriendSelectionAdapter friendSelectionAdapter) {
+    public void getFriendsList(final FriendSelectionAdapter friendSelectionAdapter) {
         myTwitterApiClient.getFriendsService().ids(twitterSession.getUserId(), null, 5000, new Callback<FriendIds>() {
             @Override
             public void success(Result<FriendIds> result) {
@@ -81,6 +51,30 @@ public class MyTwitterApi {
                 Log.d(LOG, "Failed to get the friends' ids: " + e);
             }
         });
+    }
+
+    /**
+     * Synchronous version of getting all the friends
+     */
+    public void getFriendsListSynchronous(final FriendSelectionAdapter friendSelectionAdapter) {
+
+        class GetFriendIdsTask extends AsyncTask<Void, Void, FriendIds> {
+            @Override
+            protected FriendIds doInBackground(Void... voids) {
+                FriendIds friendIds = myTwitterApiClient.getFriendsService().idsSynchronous(twitterSession.getUserId(), null, 5000);
+                return friendIds;
+            }
+
+            @Override
+            protected void onPostExecute(FriendIds friendIds) {
+                List<Long> friendUserIds = friendIds.ids;
+                getUserInfoFromIds(friendUserIds, friendSelectionAdapter);
+            }
+        }
+
+        new GetFriendIdsTask().execute();
+        Log.d(LOG, "Got all the friends synchronously");
+
     }
 
     private void getUserInfoFromIds(List<Long> friendIds, final FriendSelectionAdapter friendSelectionAdapter) {

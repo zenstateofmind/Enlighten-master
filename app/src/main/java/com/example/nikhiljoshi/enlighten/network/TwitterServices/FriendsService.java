@@ -18,4 +18,7 @@ public interface FriendsService {
     @GET("/1.1/friends/ids.json")
     void ids(@Query("user_id") long user_id, @Query("screen_name") String screen_name, @Query("count") Integer count, Callback<FriendIds> callback);
 
+    @GET("/1.1/friends/ids.json")
+    FriendIds idsSynchronous(@Query("user_id") long user_id, @Query("screen_name") String screen_name, @Query("count") Integer count);
+
 }

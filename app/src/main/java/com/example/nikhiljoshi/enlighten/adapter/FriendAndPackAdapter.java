@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by nikhiljoshi on 6/7/16.
  */
-public class FriendAndPackAdapter extends RecyclerView.Adapter {
+public class FriendAndPackAdapter extends RecyclerView.Adapter  {
 
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";
