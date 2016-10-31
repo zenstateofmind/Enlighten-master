@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pack_item_name"
+        android:contentDescription="@string/pack_name"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
     </LinearLayout>

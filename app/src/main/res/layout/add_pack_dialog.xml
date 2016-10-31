@@ -6,6 +6,7 @@
 
     <EditText
         android:id="@+id/pack_name"
+        android:contentDescription="@string/pack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/pack_top_margin"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/pack_description"
         android:hint="@string/pack_description"
+        android:contentDescription="@string/pack_description"
         android:layout_marginTop="@dimen/pack_bottom_margin"
         android:layout_marginLeft="@dimen/pack_left_right_margin"
         android:layout_marginStart="@dimen/pack_left_right_margin"

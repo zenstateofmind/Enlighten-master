@@ -12,6 +12,7 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
+        android:contentDescription="@string/ads_by_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

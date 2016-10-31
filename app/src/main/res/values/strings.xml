@@ -26,4 +26,7 @@
     <string name="please_log_in">Please log in!</string>
     <string name="please_add_some_friends">Please add some friends!</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ads_by_google">Ads by google</string>
+    <string name="image_of_your_twitter_friend">Image of your twitter friend</string>
+    <string name="profile_name_of_your_twitter_friend">Profile name of your twitter friend</string>
 </resources>
