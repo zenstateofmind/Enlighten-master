@@ -8,10 +8,12 @@
         android:id="@+id/pack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="@dimen/pack_top_margin"
+        android:layout_marginLeft="@dimen/pack_left_right_margin"
+        android:layout_marginStart="@dimen/pack_left_right_margin"
+        android:layout_marginRight="@dimen/pack_left_right_margin"
+        android:layout_marginEnd="@dimen/pack_left_right_margin"
+        android:layout_marginBottom="@dimen/pack_bottom_margin"
         android:hint="@string/pack_name" />
 
     <EditText
@@ -19,9 +21,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/pack_description"
         android:hint="@string/pack_description"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="@dimen/pack_bottom_margin"
+        android:layout_marginLeft="@dimen/pack_left_right_margin"
+        android:layout_marginStart="@dimen/pack_left_right_margin"
+        android:layout_marginRight="@dimen/pack_left_right_margin"
+        android:layout_marginEnd="@dimen/pack_left_right_margin"
+        android:layout_marginBottom="@dimen/pack_top_margin"/>
 
 </LinearLayout>

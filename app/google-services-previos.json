@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "754073700361",
+    "project_id": "firebase-enlighten"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754073700361:android:dd09e74efc3a3f05",
+        "android_client_info": {
+          "package_name": "com.example.nikhiljoshi.enlighten"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKktFMfBiZcMgqlidIQ-sMJczuubdydfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-86573933-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

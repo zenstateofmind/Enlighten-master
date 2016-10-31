@@ -16,6 +16,8 @@ import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.SelectFriendsActivity;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -45,11 +47,16 @@ public class LoginFragment extends Fragment {
 
     private static final int COL_PROFILE_NAME = 0;
 
+    private Tracker mTracker;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ((MyApplication)getActivity().getApplication()).baseTwitterComponent().inject(this);
+        // Obtain the shared Tracker instance.
+        MyApplication application = (MyApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -65,7 +72,6 @@ public class LoginFragment extends Fragment {
         final TwitterSession activeSession = sessionManager.getActiveSession();
         if (activeSession != null) {
             Intent intent = new Intent(getContext(), MainActivity.class);
-            Toast.makeText(getContext(), "Non null", Toast.LENGTH_LONG).show();
             startActivity(intent);
         } else {
             loginButton = (TwitterLoginButton) rootView.findViewById(R.id.twitter_login_button2);
@@ -87,19 +93,28 @@ public class LoginFragment extends Fragment {
                     startActivity(intent);
                 }
 
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(LoginFragment.class.getSimpleName())
+                        .setAction("Success")
+                        .setLabel("Twitter Login")
+                        .build());
+
             }
 
             @Override
             public void failure(TwitterException exception) {
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(LoginFragment.class.getSimpleName())
+                        .setAction("Failure")
+                        .setLabel("Twitter Login")
+                        .build());
             }
         };
         loginButton.setCallback(callback);
     }
 
     private boolean containsFriends() {
-
-        List<String> chosenFriendsProfileNames = new ArrayList<>();
 
         final Uri uriWithCurrentUserSessionId =
                 EnlightenContract.FriendEntry.buildFriendUriWithCurrentUserSessionId(Twitter.getSessionManager().getActiveSession().getUserId());
@@ -108,8 +123,6 @@ public class LoginFragment extends Fragment {
         if (cursor.moveToFirst()) {
             cursor.close();
             return true;
-
-
         }
 
         cursor.close();

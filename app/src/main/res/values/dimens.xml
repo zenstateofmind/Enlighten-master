@@ -11,5 +11,9 @@
     <dimen name="list_item_caption_padding">@dimen/abc_list_item_padding_horizontal_material</dimen>
     <dimen name="widget_default_height">120dp</dimen>
     <dimen name="widget_default_width">200dp</dimen>
+    <dimen name="pack_top_margin">16dp</dimen>
+    <dimen name="pack_left_right_margin">10dp</dimen>
+    <dimen name="pack_bottom_margin">4dp</dimen>
+    <dimen name="image_size">100dp</dimen>
 
 </resources>
