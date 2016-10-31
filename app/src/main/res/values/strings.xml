@@ -1,10 +1,6 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Enlighten</string>
 
-    <string name="format_author_name">By: <xliff:g name="author_name">%1$s</xliff:g></string>
-    <string name="no_books_available">Could not grab information on the available books :(</string>
-    <string name="no_books_available_internet_access">Could not get data due to internet
-    access issues! </string>
     <string name="select_friends_instruction">Hi! Please select all your friends who post interesting articles!</string>
     <string name="ok">OK</string>
     <string name="title_activity_select_friends">Select Friends</string>
@@ -29,4 +25,5 @@
     <string name="verify_user_wants_to_logout">Are you sure you want to logout of this awesomeness?</string>
     <string name="please_log_in">Please log in!</string>
     <string name="please_add_some_friends">Please add some friends!</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

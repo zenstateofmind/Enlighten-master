@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nikhiljoshi.enlighten.MyApplication;
 import com.example.nikhiljoshi.enlighten.R;
 import com.example.nikhiljoshi.enlighten.adapter.FriendSelectionAdapter;
 import com.example.nikhiljoshi.enlighten.data.EnlightenContract;
@@ -26,6 +28,11 @@ import com.example.nikhiljoshi.enlighten.network.MyTwitterApi;
 import com.example.nikhiljoshi.enlighten.pojo.Friend;
 import com.example.nikhiljoshi.enlighten.ui.Activity.MainActivity;
 import com.example.nikhiljoshi.enlighten.ui.Activity.PackActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.twitter.sdk.android.Twitter;
 
 import java.util.List;
@@ -49,6 +56,7 @@ public class SelectFriendsFragment extends Fragment {
     private FriendSource friendSourceEnum;
     private Long packId;
     private Long parentPackId;
+    private Tracker mTracker;
 
     public enum FriendSource {
         DB, API
@@ -63,6 +71,15 @@ public class SelectFriendsFragment extends Fragment {
         ActivityToStartOnFriendSelection(Class startClass) {
             this.launchClass = startClass;
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Obtain the shared Tracker instance.
+        MyApplication application = (MyApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -90,6 +107,17 @@ public class SelectFriendsFragment extends Fragment {
             api.getFriendsListTake2(mFriendSelectionAdapter);
         }
 
+//        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
+
+        AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdView.loadAd(adRequest);
+
         return rootView;
     }
 
@@ -115,6 +143,12 @@ public class SelectFriendsFragment extends Fragment {
                     updateWidgets();
                     getActivity().finish();
                     startActivity(intent);
+
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setCategory(SelectFriendsFragment.class.getSimpleName())
+                            .setAction("Success")
+                            .setLabel("Saved more friends")
+                            .build());
                 }
 
                 return true;
