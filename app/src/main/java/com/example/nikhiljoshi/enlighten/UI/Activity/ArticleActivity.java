@@ -20,7 +20,8 @@ public class ArticleActivity extends AppCompatActivity implements LoadingActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_articles);
 

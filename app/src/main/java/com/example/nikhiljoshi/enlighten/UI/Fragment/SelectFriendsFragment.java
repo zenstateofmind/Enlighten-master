@@ -8,8 +8,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -85,6 +87,12 @@ public class SelectFriendsFragment extends Fragment {
 
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_select_friends, container, false);
+
+        Toolbar toolbar = (Toolbar)rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         final Bundle arguments = getArguments();
         mLaunchClass = ((ActivityToStartOnFriendSelection) arguments.getSerializable(ACTIVITY_TO_START_ON_FRIENDS_SELECTION_TAG)).launchClass;

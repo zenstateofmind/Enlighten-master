@@ -27,7 +27,7 @@ public class PackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // if parentPackId = -1 then go to MainActivity, else open PackActivity with parentPackId
 
@@ -36,6 +36,7 @@ public class PackActivity extends AppCompatActivity {
         // get the pack_id
         final long currentPackId = getIntent().getLongExtra(PACK_ID_TAG, -1L);
         parentPackId = getIntent().getLongExtra(PARENT_PACK_ID_TAG, -1L);
+
         final ActivityToStartOnFriendSelection activityToStartOnFriendSelection =
                 ActivityToStartOnFriendSelection.PACK_ACTIVITY;
         final FriendSource friendSource = FriendSource.DB;

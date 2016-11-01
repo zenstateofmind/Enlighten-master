@@ -15,8 +15,10 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -61,15 +63,22 @@ public class ChosenFriendsFragment extends Fragment implements LoaderManager.Loa
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setHasOptionsMenu(true);
+        View rootView = inflater.inflate(R.layout.fragment_chosen_friends, container, false);
 
         final Bundle arguments = getArguments();
         activityToStartOnFriendSelectionEnum =
                 (ActivityToStartOnFriendSelection) arguments.getSerializable(ACTIVITY_TO_START_ON_FRIENDS_SELECTION_TAG);
-
         friendsSourceEnum = (FriendSource) arguments.getSerializable(FRIEND_SOURCE_FOR_ADDING_NEW_FRIENDS_TAG);
         packId = arguments.getLong(PACK_ID_TAG);
 
-        View rootView = inflater.inflate(R.layout.fragment_chosen_friends, container, false);
+        Toolbar toolbar = (Toolbar)rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (packId != MainActivity.NO_PACK) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
         mFriendAndPackAdapter = new FriendAndPackAdapter(getActivity());
         // Friends are being loaded through the cursor loader
         mFriendAndPackAdapter.loadPacksFromDb(packId);
@@ -127,7 +136,8 @@ public class ChosenFriendsFragment extends Fragment implements LoaderManager.Loa
                 //              delete the friends with this pack id
                 //                  go back to MainActivity
                 deletePack();
-            }case R.id.logout: {
+                return true;
+            } case R.id.logout: {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(getString(R.string.verify_user_wants_to_logout))
                         .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -139,7 +149,7 @@ public class ChosenFriendsFragment extends Fragment implements LoaderManager.Loa
                             }
                         });
                 builder.show();
-
+                return true;
             } default:
                 return super.onOptionsItemSelected(item);
         }

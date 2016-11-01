@@ -35,7 +35,7 @@ public class SelectFriendsActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_friends);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Intent intent = getIntent();
 

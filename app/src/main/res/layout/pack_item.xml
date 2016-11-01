@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@color/holo_blue_light">
+        android:background="@color/colorPrimaryDark">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pack_item_name"
         android:contentDescription="@string/pack_name"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
     </LinearLayout>

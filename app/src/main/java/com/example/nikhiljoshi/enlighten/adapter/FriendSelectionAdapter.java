@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class FriendSelectionAdapter extends RecyclerView.Adapter<FriendSelection
     /**
      * This is the view holder for the FriendsAdapter
      */
-    public class UsersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class UsersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView profilePicture;
         public TextView profileName;
@@ -106,11 +107,13 @@ public class FriendSelectionAdapter extends RecyclerView.Adapter<FriendSelection
         }
 
         private void setViewSettingsToSelectedUser(View itemView) {
-            itemView.setBackgroundResource(R.color.cardview_dark_background);
+            itemView.setBackgroundResource(R.color.default_background);
+            profileName.setTextColor(ContextCompat.getColor(context, R.color.cardview_dark_background));
         }
 
         private void setViewSettingsToNonSelectedUser(View itemView) {
-            itemView.setBackgroundResource(R.color.default_background);
+            itemView.setBackgroundResource(R.color.cardview_dark_background);
+            profileName.setTextColor(ContextCompat.getColor(context, R.color.default_background));
         }
     }
 
